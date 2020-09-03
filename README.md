@@ -22,12 +22,12 @@ The data is relatively clean, but needs some preprocessing. I performed:
 3. one-hot encoding for categorical features
 4. shuffle and split into train and test data sets
 
-In addition to a naive predictor, I applied three supervised algorithms:
+In addition to a naive predictor, I applied three classifiers of supervised algorithms:
 1. Decision Tree
 2. Support Vector Machines
 3. Ensemble Methods (AdaBoost)
 
-I selected F-score (beta = 0.5) as the metric for evaluating model's performance. Beta is set at 0.5 to put more emphasis on precision. The model's ability to precisely predict those that make more than $50,000 is more important than the model's ability to recall those individuals. In short, false positive is worse than false negative.
+I selected F-score (beta = 0.5) as the metric for evaluating model's performance. Beta is set at 0.5 to put more emphasis on precision. The model's ability to precisely predict those that make more than $50,000 is more important than the model's ability to recall those individuals. In other words, false positive is worse than false negative.
 
 Then I created a training and predicting pipeline to quickly and effectively train models and perform predictions on the testing data. From preliminary results, AdaBoost model proves to be the best classifier in terms of overall accuracy, F-score and training time. I further optimized the model using GridSearchCV. The final model has an accuracy score of .86 and F-score of .73.
 
