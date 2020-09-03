@@ -1,5 +1,12 @@
-
 # Finding Donors for CharityML
+
+- [Table of Contents](#Table_of_Contents)
+  - [Introduction](#Introduction)
+  - [Data](#Data)
+  - [Installation](#Installation)
+  - [Summary of Analysis](#Summary-of-Analysis)
+  - [Data Schema](#Data-Schema)
+  - [Acknowledgements](#Acknowledgements)
 
 ## Introduction
 The goal of this project is to help a fictitious charity organization (CharityML) to develop a supervised learning model that can accurately predict whether an individual makes more than $50,000 annually. Understanding an individual's income can help this charity better understand which potential donors they should reach out and the amount of  donation to request.
