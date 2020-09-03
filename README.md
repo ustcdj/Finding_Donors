@@ -40,7 +40,7 @@ I also identified top five most important features that can predict whether an i
 4. hours-per-week: the more hours per week, the more capital gain possibly
 5. education-num: the more years education, the more capital gain possibly
 
-I also tried to train the model on the same training set, but with only the top five most important features. The reduced model has an accuracy score of .83 and F-score of .68, 3.2% less accuracy, and 7.7% less F-score compared to full model. If shorter training time is preferred, I'd consider using the reduced model.
+I also tried to train the model on the same training set, but with only the top five most important features. The reduced model has an accuracy score of .83 and F-score of .68, 3.2% less accuracy, and 7.7% less F-score compared to the full model. If shorter training time is preferred, I'd consider using the reduced model.
 
 <img src="images/featureImportance.jpg" width=800>
 
