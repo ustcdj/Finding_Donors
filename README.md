@@ -29,7 +29,9 @@ In addition to a naive predictor, I applied three supervised algorithms:
 
 I selected F-score (beta = 0.5) as the metric for evaluating model's performance. Beta is set at 0.5 to put more emphasis on precision. The model's ability to precisely predict those that make more than $50,000 is more important than the model's ability to recall those individuals. In short, false positive is worse than false negative.
 
-Then I created a training and predicting pipeline to quickly and effectively train models and perform predictions on the testing data. From preliminary results, AdaBoost model proves to be the best classifier in terms of overall accuracy, F1 score and training time. I further optimized the model using GridSearchCV. The final model has an accuracy score of .86 and F1 score of .73.
+Then I created a training and predicting pipeline to quickly and effectively train models and perform predictions on the testing data. From preliminary results, AdaBoost model proves to be the best classifier in terms of overall accuracy, F-score and training time. I further optimized the model using GridSearchCV. The final model has an accuracy score of .86 and F-score of .73.
+
+<img src="images/metricsComparison.jpg" width=800>
 
 I also identified top five most important features that can predict whether an individual makes at most or more than $50,000. They are listed in order below:
 1. capital-loss: the more to lose, the less chance to donate possibly
@@ -38,7 +40,9 @@ I also identified top five most important features that can predict whether an i
 4. hours-per-week: the more hours per week, the more capital gain possibly
 5. education-num: the more years education, the more capital gain possibly
 
-I also tried to train the model on the same training set, but with only the top five most important features. The reduced model has an accuracy score of .83 and F1 score of .68, 3.2% less accuracy, and 7.7% less F-score compared to full model. If shorter training time is preferred, I'd consider using the reduced model.
+I also tried to train the model on the same training set, but with only the top five most important features. The reduced model has an accuracy score of .83 and F-score of .68, 3.2% less accuracy, and 7.7% less F-score compared to full model. If shorter training time is preferred, I'd consider using the reduced model.
+
+<img src="images/featureImportance.jpg" width=800>
 
 ## Data Schema
 **Features**
