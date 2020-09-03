@@ -1,42 +1,46 @@
-# Data Scientist Nanodegree
-# Supervised Learning
-## Project: Finding Donors for CharityML
 
-### Install
+# Finding Donors for CharityML
 
-This project requires **Python 3.x** and the following Python libraries installed:
+## Introduction
+The goal of this project is to help a fictitious charity organization (CharityML) to develop a supervised learning model that can accurately predict whether an individual makes more than $50,000 annually. Understanding an individual's income can help this charity better understand which potential donors they should reach out and the amount of  donation to request.
 
-- [NumPy](http://www.numpy.org/)
-- [Pandas](http://pandas.pydata.org)
-- [matplotlib](http://matplotlib.org/)
-- [scikit-learn](http://scikit-learn.org/stable/)
+The detailed code is in the **[`finding_donors.ipynb`](https://github.com/ustcdj/Finding_Donors/blob/master/finding_donors.ipynb)** notebook.
 
-You will also need to have software installed to run and execute an [iPython Notebook](http://ipython.org/notebook.html)
+## Data
 
-We recommend students install [Anaconda](https://www.continuum.io/downloads), a pre-packaged Python distribution that contains all of the necessary libraries and software for this project.
+The modified census dataset consists of approximately 32,000 data points, with each datapoint having 13 features. This dataset is a modified version of the dataset published in the paper *"Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid",* by Ron Kohavi. You may find this paper [online](https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf), with the original dataset hosted on [UCI](https://archive.ics.uci.edu/ml/datasets/Census+Income). More details about the data schema is at the end.
 
-### Code
+## Installation
 
-Template code is provided in the `finding_donors.ipynb` notebook file. You will also be required to use the included `visuals.py` Python file and the `census.csv` dataset file to complete your work. While some code has already been implemented to get you started, you will need to implement additional functionality when requested to successfully complete the project. Note that the code included in `visuals.py` is meant to be used out-of-the-box and not intended for students to manipulate. If you are interested in how the visualizations are created in the notebook, please feel free to explore this Python file.
+The code was developed using the Anaconda distribution of Python, versions 3.8.1. Python libraries used are `numpy`, `pandas`,  `sklearn`, `matplotlib`
 
-### Run
+## Summary of Analysis
 
-In a terminal or command window, navigate to the top-level project directory `finding_donors/` (that contains this README) and run one of the following commands:
+The data is relatively clean, but needs some preprocessing. I performed:
+1. log transformations on features that are highly skewed
+2. scaling on numerical features to ensures that each feature is treated equally, so feature importance comparison is easy
+3. one-hot encoding for categorical features
+4. shuffle and split into train and test data sets
 
-```bash
-ipython notebook finding_donors.ipynb
-```  
-or
-```bash
-jupyter notebook finding_donors.ipynb
-```
+In addition to a naive predictor, I applied three supervised algorithms:
+1. Decision Tree
+2. Support Vector Machines
+3. Ensemble Methods (AdaBoost)
 
-This will open the iPython Notebook software and project file in your browser.
+I selected F-score (beta = 0.5) as the metric for evaluating model's performance. Beta is set at 0.5 to put more emphasis on precision. The model's ability to precisely predict those that make more than $50,000 is more important than the model's ability to recall those individuals. In short, false positive is worse than false negative.
 
-### Data
+Then I created a training and predicting pipeline to quickly and effectively train models and perform predictions on the testing data. From preliminary results, AdaBoost model proves to be the best classifier in terms of overall accuracy, F1 score and training time. I further optimized the model using GridSearchCV. The final model has an accuracy score of .86 and F1 score of .73.
 
-The modified census dataset consists of approximately 32,000 data points, with each datapoint having 13 features. This dataset is a modified version of the dataset published in the paper *"Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid",* by Ron Kohavi. You may find this paper [online](https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf), with the original dataset hosted on [UCI](https://archive.ics.uci.edu/ml/datasets/Census+Income).
+I also identified top five most important features that can predict whether an individual makes at most or more than $50,000. They are listed in order below:
+1. capital-loss: the more to lose, the less chance to donate possibly
+2. age: the older, the more capital gain possibly
+3. capital-gain: the more to make, the better chance to donate possibly
+4. hours-per-week: the more hours per week, the more capital gain possibly
+5. education-num: the more years education, the more capital gain possibly
 
+I also tried to train the model on the same training set, but with only the top five most important features. The reduced model has an accuracy score of .83 and F1 score of .68, 3.2% less accuracy, and 7.7% less F-score compared to full model. If shorter training time is preferred, I'd consider using the reduced model.
+
+## Data Schema
 **Features**
 - `age`: Age
 - `workclass`: Working Class (Private, Self-emp-not-inc, Self-emp-inc, Federal-gov, Local-gov, State-gov, Without-pay, Never-worked)
@@ -54,3 +58,6 @@ The modified census dataset consists of approximately 32,000 data points, with e
 
 **Target Variable**
 - `income`: Income Class (<=50K, >50K)
+
+## Acknowledgements
+Special thanks to Udacity for creating this awesome project.
